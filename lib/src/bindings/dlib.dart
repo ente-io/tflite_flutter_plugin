@@ -1,8 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:path/path.dart' as Path;
-
 const Set<String> _supported = {'linux', 'mac', 'win'};
 
 String get binaryName {
@@ -31,12 +29,12 @@ String get binaryName {
 // ignore: missing_return
 DynamicLibrary tflitelib = () {
   if (Platform.isAndroid) {
-    return DynamicLibrary.open('libtensorflowlite_c.so');
+    return DynamicLibrary.open('libtensorflowlite_jni.so');
   } else if (Platform.isIOS) {
     return DynamicLibrary.process();
-  } else {    
+  } else {
     return DynamicLibrary.open(
-      Directory(Platform.resolvedExecutable).parent.path + '/blobs/${binaryName}'
-    );
+        Directory(Platform.resolvedExecutable).parent.path +
+            '/blobs/${binaryName}');
   }
 }();
