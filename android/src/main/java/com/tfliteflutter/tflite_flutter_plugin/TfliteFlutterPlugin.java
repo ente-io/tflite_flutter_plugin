@@ -50,7 +50,7 @@ public class TfliteFlutterPlugin implements FlutterPlugin, MethodCallHandler {
     if (hasLoadedLibrary) {
       return;
     }
-    System.loadLibrary("libtensorflowlite_flex_jni.so");
+    System.loadLibrary("tensorflowlite_flex_jni");
     hasLoadedLibrary = true;
   }
 }
