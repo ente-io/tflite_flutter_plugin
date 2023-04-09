@@ -38,3 +38,17 @@ DynamicLibrary tflitelib = () {
             '/blobs/${binaryName}');
   }
 }();
+
+/// TensorFlowLite C library.
+// ignore: missing_return
+DynamicLibrary tflitelibgpu = () {
+  if (Platform.isAndroid) {
+    return DynamicLibrary.open('libtensorflowlite_gpu_jni.so');
+  } else if (Platform.isIOS) {
+    return DynamicLibrary.process();
+  } else {
+    return DynamicLibrary.open(
+        Directory(Platform.resolvedExecutable).parent.path +
+            '/blobs/${binaryName}');
+  }
+}();
