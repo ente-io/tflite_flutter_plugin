@@ -29,7 +29,7 @@ String get binaryName {
 // ignore: missing_return
 DynamicLibrary tflitelib = () {
   if (Platform.isAndroid) {
-    return DynamicLibrary.open('libtensorflowlite_flex_jni.so');
+    return DynamicLibrary.open('libtensorflowlite_c.so');
   } else if (Platform.isIOS) {
     return DynamicLibrary.process();
   } else {
