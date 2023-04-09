@@ -10,8 +10,11 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** TfliteFlutterPlugin */
 public class TfliteFlutterPlugin implements FlutterPlugin, MethodCallHandler {
+  private static boolean hasLoadedLibrary = false;
+  
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+    loadLibrary();
     final MethodChannel channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "tflite_flutter_plugin");
     channel.setMethodCallHandler(new TfliteFlutterPlugin());
   }
@@ -41,5 +44,13 @@ public class TfliteFlutterPlugin implements FlutterPlugin, MethodCallHandler {
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+  }
+
+  private static void loadLibrary() {
+    if (hasLoadedLibrary) {
+      return;
+    }
+    System.loadLibrary("libtensorflowlite_flex_jni.so");
+    hasLoadedLibrary = true;
   }
 }
